@@ -13,16 +13,18 @@
             //PDOs can connect to any type of database without changing the code
             // http://us2.php.net/manual/en/book.pdo.php
         
-            if (!empty($POST)) {
+            if ( !empty($_POST) ) {
                 
-                $sql = "insert into users set fullname=" 
+                $sql = "insert into users set fullname='"
                         . $_POST['fullname'] . 
-                        "', email = 'test@test.com', phone= '4014443333', zip= '12345';";
+                        "', email = 'test@test.com', phone = '4014443333', zip = '12345';";
                 
                 $pdo->exec($sql);
+                
                 echo $_POST['fullname'];
-            //input fields must be inside the form or they won't get sent with the data. 
             }
+            //input fields must be inside the form or they won't get sent with the data. 
+            
                    
             
             //var_dump($pdo);
@@ -34,16 +36,16 @@
             $users = $statement->fetch(PDO::FETCH_ASSOC);
             
             // using the foreach loops on our users database
-            foreach($users as $key => $value){
-                echo '<p>', $key, ' = ', $value, '</p>';
+            foreach($users as $key => $value) {
+                echo '<p>', $key , ' = ', $value, '</p>';
             }
             
             //fetch all returns an array within an array, a multidimentional array
             $users = $statement->fetchAll(PDO::FETCH_ASSOC);
             var_dump($users);
-            foreach ($users as $user){
-                foreach($users as $key => $value){
-                    echo '<p>', $key, ' = ', $value, '</p>';
+            foreach($users as $user) {
+                foreach($user as $key => $value) {
+                    echo '<p>', $key , ' = ', $value, '</p>';
                 }
             }
             //var_dump($users);
