@@ -17,7 +17,6 @@
         { $interest_rate = rand(1, 15);}
         if (empty ($years))
         { $years = rand(1, 50);}
-    
     } ?>
     <form action="display_results.php" method="post">
 
