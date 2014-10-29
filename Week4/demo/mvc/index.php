@@ -1,5 +1,7 @@
 <?php
 
+include 'views/header.php';
+
 $action = 'home';
 
 if ( !empty($_POST) && isset($_POST['action']) ) {
@@ -18,3 +20,5 @@ if ( $action === 'view_products' ) {
     echo 'home';
     // home
 }
+
+include 'views/footer.php';
