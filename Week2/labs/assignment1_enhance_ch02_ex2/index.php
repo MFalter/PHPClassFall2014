@@ -7,6 +7,7 @@
 </head>
 
 <body>
+    
     <div id="content">
     <h1>Future Value Calculator</h1>
     <?php if (empty($_POST) )
