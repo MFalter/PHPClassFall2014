@@ -6,44 +6,32 @@
     </head>
     <body>
         <?php
-        // put your code here
+       
+            $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
+            $dbs = $db->prepare('select * from users');
         
-        $id = filter_input(INPUT_GET, 'id');
-        $username = filter_input(INPUT_GET, 'username');
-        $db = new PDO(Config::DB_DNS, Config::DB_USER, Config::DB_PASSWORD);
-        $dbs = $db->prepare('select * from signup where id = :id or username = :username limit 1');
-        //$dbs = $db->prepare('insert into signup set email = :email, username = :username, password = :password');
-        $dbs->bindParam(':id', $id, PDO::PARAM_INT);
-        $dbs->bindParam(':username', $username, PDO::PARAM_STR);
-        $dbs->execute();
-        
-        
-        if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
-                $isTaken = true;
+            if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
+                
+                $results = $dbs->fetchAll(PDO::FETCH_ASSOC);
+                
+                echo '<table border="1">'; 
+                echo '<tr><th>Index</th><th>ID</th><th>Email</th>';
+                echo '<th>fullname</th><th>phone</th><th>ZIP</th><th></th><th></th></tr>';
+                foreach ($results as $key => $value) {
+                    echo '<tr>';
+                     echo '<td>', $key ,'</td>';
+                     echo '<td>', $value['id'] ,'</td>';
+                     echo '<td>', $value['fullname'] ,'</td>';
+                     echo '<td>', $value['email'] ,'</td>';
+                     echo '<td>', $value['phone'] ,'</td>';
+                     echo '<td>', $value['zip'] ,'</td>';          
+                     echo '<td><a href="updateuser.php?id=',$value['id'],'">Update</a></td>';          
+                     echo '<td><a href="deleteuser.php?id=',$value['id'],'">Delete</a></td>';   
+                    echo '</tr>';
+                }
+                echo '</table>';
+                echo '</br><td><a href="adduser.php?id=',$value['id'],'">Add User</a></td>';  
             }
-        
-        /*
-         * for one record use
-         */
-        $results = $dbs->fetch(PDO::FETCH_ASSOC);
-         
-        
-        $results = $dbs->fetchAll(PDO::FETCH_ASSOC);
-        echo '<table border="1">'; 
-        echo '<tr><th>Index</th><th>ID</th><th>Email</th>';
-        echo '<th>username</th><th>password</th></tr>';
-        foreach ($results as $key => $value) {
-            echo '<tr>';
-             echo '<td>', $key ,'</td>';
-             echo '<td>', $value['id'] ,'</td>';
-             echo '<td>', $value['email'] ,'</td>';
-             echo '<td>', $value['username'] ,'</td>';
-             echo '<td>', $value['password'] ,'</td>';          
-            echo '</tr>';
-        }
-        echo '</table>';
-        
-        
         ?>
     </body>
 </html>

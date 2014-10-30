@@ -23,6 +23,6 @@ $dbs->bindParam(':id', $id, PDO::PARAM_INT);
            
 ?>
         
-         <a href="viewpage.php">View Users</a>
+         <a href="index.php">View Users</a>
     </body>
 </html>
