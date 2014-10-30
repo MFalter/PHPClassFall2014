@@ -2,30 +2,39 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>User Data Add</title>
+    <title>User Data Update</title>
     <link rel="stylesheet" type="text/css" href="main.css"/>
 </head>
 
 <body>
     
-    <div id="content">
-    <h1>User Data Add</h1>
-    <?php 
-    $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
-    
-        if (empty($_POST) )
-        {
-        if ( empty($name) ) 
-        { $name = ""; } 
-        if ( empty ($phone_number) )
-        { $phone_number = ""; }
-        if ( empty ($email) )
-        { $email = ""; }
-        if ( empty($zip_code) )
-        { $zip_code = ""; }
-    } ?>
-    <form action="display_results.php" method="post">
+<?php
+$name = "";
+$phone_number = "";
+$email = "";
+$zip_code = "";
 
+$id = filter_input(INPUT_GET, 'id');
+$db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
+$dbs = $db->prepare('select * FROM users WHERE id = :id');
+
+$dbs->bindParam(':id', $id, PDO::PARAM_INT);
+
+if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
+    $results = $dbs->fetch(PDO::FETCH_ASSOC);
+    $name = $results['fullname'];
+    $phone_number = $results['phone'];
+    $email = $results['email'];
+    $zip_code = $results['zip'];
+    }
+?>
+    
+    <div id="content">
+        <h1>User Data Update</h1>
+
+        <form action="process_update_user.php" method="post">
+        <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+        
         <div id="data">
             <label>Name:</label>
             <input type="text" name="name" value="<?php echo $name; ?>"/><br />
@@ -43,18 +52,16 @@
         <div id="buttons">
             <br />
             <label>&nbsp;</label>
-            <input type="submit" value="Add User"/><br />
+            <input type="submit" value="Update User"/><br />
         </div>
 
     </form>
     <?php if (!empty($error_message)) { ?>
         <p class="error"><?php echo $error_message; ?></p>
-    <?php } 
-    //$dbs = $db->prepare('insert users set fullname = :fullname, email = :email, phone = :phone, zip = :zip');
-    ?> 
-        
+    <?php } ?> 
     </div>
     
-    <a href="index.php">View Users</a>
+    <a href="index.php">View Users</a> 
+    
 </body>
 </html>

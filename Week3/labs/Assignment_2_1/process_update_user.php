@@ -1,5 +1,6 @@
 <?php
     // get the data from the form
+    $id = $_POST['id'];
     $name = $_POST['name'];
     $phone_number = $_POST['phone_number'];
     $email = $_POST['email'];
@@ -29,33 +30,22 @@
     if ($error_message != '') {
         include('adduser.php');
         exit();}
+    
+        //insert no where clause
+    $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
+    $dbs = $db->prepare('update users set fullname = :fullname, email = :email, phone = :phone, zip = :zip WHERE id = :id');
+    $dbs->bindParam(':id', $id, PDO::PARAM_INT);
+    $dbs->bindParam(':fullname', $name, PDO::PARAM_STR);
+    $dbs->bindParam(':email', $email, PDO::PARAM_STR);
+    $dbs->bindParam(':phone', $phone_number, PDO::PARAM_STR);
+    $dbs->bindParam(':zip', $zip_code, PDO::PARAM_STR);
 
+    // $id won't work on add page
+    if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
+        echo '<h1> user ', $id,' was updated</h1>';
+    } else {
+      echo '<h1> user ', $id,' was <strong>NOT</strong> updated</h1>';
+    }
+    
 ?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>User Data Display</title>
-    <link rel="stylesheet" type="text/css" href="main.css"/>
-</head>
-
-<body>
-    <div id="content">
-        <h1>User Data Display</h1>
-
-        <label>Name:</label>
-        <span><?php echo $name; ?></span><br />
-
-        <label>Phone Number:</label>
-        <span><?php echo $phone_number; ?></span><br />
-
-        <label>Email:</label>
-        <span><?php echo $email; ?></span><br />
-
-        <label>Zip Code:</label>
-        <span><?php echo $zip_code; ?></span><br />
-    </div>
 <a href="index.php">View Users</a>
-</body>
-</html>

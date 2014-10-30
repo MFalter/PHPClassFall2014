@@ -25,7 +25,7 @@
                      echo '<td>', $value['email'] ,'</td>';
                      echo '<td>', $value['phone'] ,'</td>';
                      echo '<td>', $value['zip'] ,'</td>';          
-                     echo '<td><a href="updateuser.php?id=',$value['id'],'">Update</a></td>';          
+                     echo '<td><a href="Update2.php?id=',$value['id'],'">Update</a></td>';          
                      echo '<td><a href="deleteuser.php?id=',$value['id'],'">Delete</a></td>';   
                     echo '</tr>';
                 }

@@ -9,7 +9,7 @@
         
 $id = filter_input(INPUT_GET, 'id');
 $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
-$dbs = $db->prepare('update from users where id = :id');     
+$dbs = $db->prepare('select * FROM users WHERE id = :id');     
      
 $dbs->bindParam(':id', $id, PDO::PARAM_INT);
 
@@ -22,16 +22,16 @@ $dbs->bindParam(':id', $id, PDO::PARAM_INT);
 
         <form action="updateuser.php.php" method="post" id="update_user"  >  
         <label>Name:</label>
-        <span><?php echo $results['name']; ?></span><br />
+        <span><?php echo $results['fullname']; ?></span><br />
 
         <label>Phone Number:</label>
-        <span><?php echo $results['phone_number']; ?></span><br />
+        <span><?php echo $results['phone']; ?></span><br />
 
         <label>Email:</label>
-        <span><?php echo $results['mail']; ?></span><br />
+        <span><?php echo $results['email']; ?></span><br />
 
         <label>Zip Code:</label>
-        <span><?php echo $results['zip_code']; ?></span><br />
+        <span><?php echo $results['zip']; ?></span><br />
     </div>
 <a href="index.php">View Users</a>
      
