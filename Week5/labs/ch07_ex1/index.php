@@ -11,11 +11,6 @@
         $email = '';
         $password = '';
         $phone = '';
-            if ( empty($_POST) ){
-                $email = $_POST['email'];
-                $password = $_POST['password'];
-                $phone = $_POST['phone'];
-            }
         $heardSelected = filter_input(INPUT_POST, 'heard_from');
         $wants_updates = filter_input(INPUT_POST, 'wants_updates');
         $checked_text = 'checked="checked"';

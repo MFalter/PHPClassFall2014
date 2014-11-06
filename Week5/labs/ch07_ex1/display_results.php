@@ -21,13 +21,19 @@
     
     // for the wants_updates check box,
     // display a value of 'Yes' or 'No'
-    if ($wants_updates === 'on'){
-              $wants_updates = 'yes';}
-              else {$wants_updates = 'no';}
+    if ($wants_updates === 'on')
+        {
+              $wants_updates = 'yes';
+              
+        } else {
+                  $wants_updates = 'no';  
+              }
               
     // #8
-    $comment = $_POST['comment'];
-    $comment = htmlspecialchars($comment, ENT_COMPAT, 'ISO-8859-1', false);
+    $comments = htmlspecialchars($comments, ENT_COMPAT, 'ISO-8859-1', false);
+    
+    // #9
+    $comments = nl2br($comments, false);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
