@@ -16,12 +16,19 @@
         ?>
         
           <form action="#" method="post">
-            
-1. ford <input type="checkbox" name="pep" /> <br />
-2. chevy <input type="checkbox" name="mush" checked="checked" /> <br />
-3. honda <input type="checkbox" name="olv" /> <br />
-
-              
+            <?PHP // Value is optional but will always return as "on" or "off""?>
+1. pepperoni <input type="checkbox" name="pep" 
+                    <?PHP if ($pep == 'on'){
+                        echo 'checked="checked"';
+                    } ?> /><br />
+2. mushroom <input type="checkbox" name="mush" checked="checked" 
+                   <?PHP if ($mush == 'on'){
+                        echo 'checked="checked"';
+                    } ?> /><br />
+3. olive <input type="checkbox" name="olv" 
+                <?PHP if ($olv == 'on'){
+                        echo 'checked="checked"';
+                    } ?> /><br />              
 <input type="submit" value="submit" />
             
             

@@ -15,10 +15,10 @@
         ?>
         
           <form action="#" method="post">
-            
-1. ford <input type="checkbox" name="tops[]" value="pep" /> <br />
-2. chevy <input type="checkbox" name="tops[]" value="mush" checked="checked" /> <br />
-3. honda <input type="checkbox" name="tops[]" value="olv" /> <br />
+            <?PHP //put a name in an array in the post?>
+1. pepperoni <input type="checkbox" name="tops[]" value="pep" /> <br />
+2. mushroom <input type="checkbox" name="tops[]" value="mush" checked="checked" /> <br />
+3. olive <input type="checkbox" name="tops[]" value="olv" /> <br />
 
               
 <input type="submit" value="submit" />
