@@ -11,17 +11,18 @@ Check Github for the SQL needed>
 
 <?php
     // get the data from the form
-    
+    //$email = '';    
+    //$password = '';
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Account Information</title>
+    <title>Signup</title>
     <link rel="stylesheet" type="text/css" href="main.css"/>
 </head>
 <body>
     <div id="content">
-        <h1>Account Information</h1>
+        <h1>Signup</h1>
         <form action="." method="post">
         <input type="hidden" name="action" value="process_data"/>
 

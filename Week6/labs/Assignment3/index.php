@@ -18,6 +18,8 @@ if (isset($_POST['action'])) {
 
 switch ($action) {
     case 'start_app':
+        $email = '';
+        $password = '';
         $message = 'Enter e-mail address and password';
         break;
     case 'process_data':
@@ -42,14 +44,18 @@ switch ($action) {
         if ($i === false){
             $message = 'No @ was found in the email address';
         }
-  
+        else {
+            $message = 'Email address and password have been accepted.';
+        }
         /*************************************************
          * validate and process the password
          ************************************************/
-        
-        
-
-
+        // Make sure the password is at least 4 characters
+        $i = strlen($password);
+        if ($i < 4){
+            $message = 'Password is too short.';
+        }
+        $password = sha1($password);
         break;
 }
 include 'display_results.php';
