@@ -9,12 +9,6 @@ Before saving the password, make sure to hash the password using the sha1 functi
 
 Check Github for the SQL needed>
 
-<?php
-    // get the data from the form
-    //$email = '';    
-    //$password = '';
-?>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Signup</title>
