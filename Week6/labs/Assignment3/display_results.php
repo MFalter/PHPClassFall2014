@@ -11,9 +11,7 @@ Check Github for the SQL needed>
 
 <?php
     // get the data from the form
-    $email = "";
-    $password = "";
-    $error_message = "";
+    
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -24,6 +22,8 @@ Check Github for the SQL needed>
 <body>
     <div id="content">
         <h1>Account Information</h1>
+        <form action="." method="post">
+        <input type="hidden" name="action" value="process_data"/>
 
         <label>E-Mail Address:</label>
         <input type="text" name="email" 
@@ -31,7 +31,7 @@ Check Github for the SQL needed>
         <br /><br />
 
         <label>Password:</label>
-        <input type="text" name="phone" 
+        <input type="text" name="password" 
                value="<?php echo htmlspecialchars($password); ?>"/>
         <br /><br />
         
@@ -40,7 +40,7 @@ Check Github for the SQL needed>
         <br />
         
         <h2>Message:</h2>
-        <p><?php echo nl2br(htmlspecialchars($error_message)); ?></p>
+        <p><?php echo nl2br(htmlspecialchars($message)); ?></p>
     </div>
 </body>
 </html>

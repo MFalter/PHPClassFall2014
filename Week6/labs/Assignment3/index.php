@@ -23,7 +23,7 @@ switch ($action) {
     case 'process_data':
         $email = $_POST['email'];
         $email = trim($email); // Gets rid of spaces on the ends
-        $phone = $_POST['password'];
+        $password = $_POST['password'];
         $message = '';
 
         /*************************************************
@@ -34,15 +34,15 @@ switch ($action) {
             $message = 'You must enter your email address.';
         }
         // make sure the email address has at least one @ sign and one dot character
-        $i = strpos($email, '@');
-        if ($i === false){
-            $message = 'No @ was found in the email address';
-        }
         $i = strpos($email, '.');
         if ($i === false){
             $message = 'No period(.) was found in the email address';
         }
-            
+        $i = strpos($email, '@');
+        if ($i === false){
+            $message = 'No @ was found in the email address';
+        }
+  
         /*************************************************
          * validate and process the password
          ************************************************/
