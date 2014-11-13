@@ -20,14 +20,18 @@
             echo '<br />',$my_str5;
             
         /*Shortcut allowing you to do multiple line statements without using echo every time */
-            //heredoc
-            /*
-            $str = <<<END
-            this is a message 
-            with a <br /> test inside.
-            END;
+    //heredoc
+$str = <<<END
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>${my_str1}</title>
+    </head>
+    <body>
+END;
                     
-            echo $str;*/
+            echo $str;
             
         /* sha1 will make it so an encripted variable can't be unencripted.  It's a one way encription*/
             $password = 'test';
