@@ -11,15 +11,9 @@ Check Github for the SQL needed>
 
 <?php
     // get the data from the form
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = "";
+    $password = "";
     $error_message = "";
-    
-    if ( filter_var($email, FILTER_VALIDATE_EMAIL) != false ) {
-                $error_message ='The email address is valid';
-            } else {
-                $error_message ='The email address is NOT valid';
-            }
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">

@@ -6,6 +6,13 @@
     <link rel="stylesheet" type="text/css" href="main.css"/>
 </head>
 
+<?php
+        $name = "";
+        $email = "";
+        $phone = "";
+        $message = '';
+?>
+    
 <body>
     <div id="content">
         <h1>String Tester</h1>
