@@ -17,6 +17,20 @@ Check Github for the SQL needed>
 <body>
     <div id="content">
         <h1>Signup</h1>
+        <?php 
+    $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
+    
+        if (empty($_POST) )
+        {
+        if ( empty($name) ) 
+        { $name = ""; } 
+        if ( empty ($phone_number) )
+        { $phone_number = ""; }
+        if ( empty ($email) )
+        { $email = ""; }
+        if ( empty($zip_code) )
+        { $zip_code = ""; }
+    } ?>
         <form action="." method="post">
         <input type="hidden" name="action" value="process_data"/>
 
@@ -35,7 +49,13 @@ Check Github for the SQL needed>
         <br />
         
         <h2>Message:</h2>
-        <p><?php echo nl2br(htmlspecialchars($message)); ?></p>
+        <?php if (!empty($error_message)) { ?>
+        <p class="error"><?php echo nl2br(htmlspecialchars($message)); ?></p>
+        <?php } 
+        else{
+            $dbs = $db->prepare('insert users set fullname = :fullname, email = :email, phone = :phone, zip = :zip');
+        }
+    ?> 
     </div>
 </body>
 </html>

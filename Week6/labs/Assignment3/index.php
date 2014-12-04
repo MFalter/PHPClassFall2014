@@ -44,9 +44,10 @@ switch ($action) {
         if ($i === false){
             $message = 'No @ was found in the email address';
         }
-        else {
+        if ($message == "") {
             $message = 'Email address and password have been accepted.';
         }
+        
         /*************************************************
          * validate and process the password
          ************************************************/
