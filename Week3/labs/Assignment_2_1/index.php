@@ -21,8 +21,8 @@
                     echo '<tr>';
                      echo '<td>', $key ,'</td>';
                      echo '<td>', $value['id'] ,'</td>';
-                     echo '<td>', $value['fullname'] ,'</td>';
                      echo '<td>', $value['email'] ,'</td>';
+                     echo '<td>', $value['fullname'] ,'</td>';
                      echo '<td>', $value['phone'] ,'</td>';
                      echo '<td>', $value['zip'] ,'</td>';          
                      echo '<td><a href="Update2.php?id=',$value['id'],'">Update</a></td>';          
