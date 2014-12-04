@@ -38,9 +38,9 @@
     $dbs->bindParam(':zip', $zip_code, PDO::PARAM_STR);
     
     if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
-        echo '<h1> user ', $name,' was added</h1>';
+        echo '<h1> User ', $name,' was added</h1>';
     } else {
-      echo '<h1> user ', $name,' was <strong>NOT</strong> added</h1>';
+      echo '<h1> User ', $name,' was <strong>NOT</strong> added</h1>';
     }    
         
     }

@@ -15,9 +15,9 @@
     $dbs->bindParam(':id', $id, PDO::PARAM_INT);
         
     if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
-        echo '<h1> user ', $id,' was deleted</h1>';
+        echo '<h1> User ', $id,' was deleted</h1>';
     } else {
-      echo '<h1> user ', $id,' was <strong>NOT</strong> deleted</h1>';
+      echo '<h1> User ', $id,' was <strong>NOT</strong> deleted</h1>';
     }
          
     ?>
