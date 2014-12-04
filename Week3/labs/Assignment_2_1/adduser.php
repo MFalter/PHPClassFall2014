@@ -47,28 +47,7 @@
         </div>
 
     </form>
-    <?php if (!empty($error_message)) { ?>
-        <p class="error"><?php echo $error_message; ?></p>
-    <?php } 
-    $dbs = $db->prepare('insert users set fullname = :name, email = :email, phone = :phone_number, zip = :zip_code');
-    
-    $name = filter_input(INPUT_POST, 'name');
-    $email = filter_input(INPUT_POST, 'email');
-    $phone_number = filter_input(INPUT_POST, 'phone_number');
-    $zip_code = filter_input(INPUT_POST, 'zip_code');
-    
-    $dbs->bindParam(':name', $name, PDO::PARAM_STR);
-    $dbs->bindParam(':email', $email, PDO::PARAM_STR);
-    $dbs->bindParam(':phone_number', $zip_code, PDO::PARAM_STR);
-    $dbs->bindParam(':zip_code', $zip_code, PDO::PARAM_STR);
-    
-    if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
-        echo '<h1> user ', $name,' was added</h1>';
-    } else {
-      echo '<h1> user ', $name,' was <strong>NOT</strong> added</h1>';
-    }
-    ?> 
-        
+            
     </div>
     
         <a href="index.php">View Users</a>
