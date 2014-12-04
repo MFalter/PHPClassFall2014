@@ -49,13 +49,14 @@ Check Github for the SQL needed>
         <br />
         
         <h2>Message:</h2>
-        <?php if (!empty($error_message)) { ?>
+        <?php if ($message != 'Email address and password have been accepted.') { ?>
         <p class="error"><?php echo nl2br(htmlspecialchars($message)); ?></p>
-        <?php } 
-        else{
-            $dbs = $db->prepare('insert users set fullname = :fullname, email = :email, phone = :phone, zip = :zip');
-        }
-    ?> 
+        <?php }  ?>
+        <?php if ($message == 'Email address and password have been accepted.') { ?>
+        <p class="error"><?php echo nl2br(htmlspecialchars($message)); ?></p>
+        <?php  
+        $dbs = $db->prepare('insert users set fullname = :fullname, email = :email, phone = :phone, zip = :zip');?> 
+        <?php } ?>
     </div>
 </body>
 </html>
