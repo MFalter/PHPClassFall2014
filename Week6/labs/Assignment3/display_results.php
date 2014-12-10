@@ -25,7 +25,11 @@ Check Github for the SQL needed>
         
         $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
         $dbs = $db->prepare('select * from signup');
-    
+        
+        if (!empty ($password))
+        {
+            $password = sha1($password);
+        }
         if (empty($_POST) )
         {
             if ( empty ($email) )
@@ -43,8 +47,8 @@ Check Github for the SQL needed>
         <br /><br />
 
         <label>Password:</label>
-        <input type="password" name="password" 
-               value="<?php echo sha1($password); ?>"/>
+        <input type="text" name="password" 
+               value="<?php echo htmlspecialchars($password); ?>"/>
         <br /><br />
         
         <label>&nbsp;</label>
@@ -55,6 +59,7 @@ Check Github for the SQL needed>
         <?php  
         if ($message == 'Email address and password have been accepted.')
         {
+        $password = sha1($password);
         $dbs = $db->prepare('insert signup set email = :email, password = :password');
         $dbs->bindParam(':email', $email, PDO::PARAM_STR);
         $dbs->bindParam(':password', $password, PDO::PARAM_STR);
