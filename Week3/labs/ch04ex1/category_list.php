@@ -32,10 +32,19 @@
             <th>Name</th>
             <th>&nbsp;</th>
         </tr>
-        
-    <!-- add code for the rest of the table here -->
-    
-    </table>
+                <?php foreach ($categoriess as $category) : ?>
+                <tr>
+                    <td><?php echo $category_name['categoryName']; ?></td>
+                    <td class="right"><?php echo $category['listPrice']; ?></td>
+                    <td><form action="delete_category.php" method="post"
+                              id="delete_category_form">
+                        <input type="hidden" name="category_id"
+                               value="<?php echo $category['categoryID']; ?>" />
+                        <input type="submit" value="Delete" />
+                    </form></td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
     <br />
 
     <h2>Add Category</h2>
