@@ -8,7 +8,6 @@ Once everything is validated save the data into the data base.
 Before saving the password, make sure to hash the password using the sha1 function built into PHP.
 
 Check Github for the SQL needed>
-
 <?php
 if (isset($_POST['action'])) {
     $action =  $_POST['action'];

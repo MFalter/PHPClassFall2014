@@ -18,20 +18,23 @@ Check Github for the SQL needed>
     <div id="content">
         <h1>Signup</h1>
         <?php 
-    $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
+        // get the data from the form
+    $email = filter_input(INPUT_POST, 'email');
+    $password = filter_input(INPUT_POST, 'password');
+    //$message = filter_input(INPUT_POST, 'message')
+        
+        $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
+        $dbs = $db->prepare('select * from signup');
     
         if (empty($_POST) )
         {
-        if ( empty($name) ) 
-        { $name = ""; } 
-        if ( empty ($phone_number) )
-        { $phone_number = ""; }
-        if ( empty ($email) )
-        { $email = ""; }
-        if ( empty($zip_code) )
-        { $zip_code = ""; }
-    } ?>
-        <form action="." method="post">
+            if ( empty ($email) )
+            { $email = ""; }
+            if ( empty($password) )
+            { $password = ""; }
+        } ?>
+        
+        <form action="#" method="post">
         <input type="hidden" name="action" value="process_data"/>
 
         <label>E-Mail Address:</label>
@@ -40,8 +43,8 @@ Check Github for the SQL needed>
         <br /><br />
 
         <label>Password:</label>
-        <input type="text" name="password" 
-               value="<?php echo htmlspecialchars($password); ?>"/>
+        <input type="password" name="password" 
+               value="<?php echo sha1($password); ?>"/>
         <br /><br />
         
         <label>&nbsp;</label>
@@ -49,14 +52,18 @@ Check Github for the SQL needed>
         <br />
         
         <h2>Message:</h2>
-        <?php if ($message != 'Email address and password have been accepted.') { ?>
-        <p class="error"><?php echo nl2br(htmlspecialchars($message)); ?></p>
-        <?php }  ?>
-        <?php if ($message == 'Email address and password have been accepted.') { ?>
-        <p class="error"><?php echo nl2br(htmlspecialchars($message)); ?></p>
         <?php  
-        $dbs = $db->prepare('insert users set fullname = :fullname, email = :email, phone = :phone, zip = :zip');?> 
-        <?php } ?>
+        if ($message == 'Email address and password have been accepted.')
+        {
+        $dbs = $db->prepare('insert signup set email = :email, password = :password');
+        $dbs->bindParam(':email', $email, PDO::PARAM_STR);
+        $dbs->bindParam(':password', $password, PDO::PARAM_STR);
+        }
+        if ( $dbs->execute() && $dbs->rowCount() > 0 ) {?>
+        <p class="error"><?php echo nl2br(htmlspecialchars($message)); ?></p>
+        <?php } else { ?>
+        <p class="error"><?php echo nl2br(htmlspecialchars($message)); ?></p>
+        <?php  } ?>
     </div>
 </body>
 </html>
