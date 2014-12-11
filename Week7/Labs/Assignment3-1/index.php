@@ -1,14 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
-
-Create a Signup web form (page) that will take in a email and password. 
-Add Validation to check for an email 
-and make sure a password greater than 4 characters are entered.  
-Once everything is validated save the data into the data base.  
-Before saving the password, make sure to hash the password using the sha1 function built into PHP.
-
-Check Github for the SQL needed>
 <?php
+include_once "functions.php";
 if (isset($_POST['action'])) {
     $action =  $_POST['action'];
 } else {
@@ -30,33 +22,43 @@ switch ($action) {
         /*************************************************
          * validate and process the email address
          ************************************************/
-        // make sure the user enters an email
-        if (empty($email)){
+        if (!empty($email)){
+            $email_valid = email_validation($email);
+        
+            if ($email_valid === true) {
+                $message = "Email address has been accepted.";
+            }
+            if ($email_valid === false) {
+            $message = "Enter a valid email address";
+            }
+        }
+        else if (empty($email)){
             $message = 'You must enter your email address.';
         }
-        // make sure the email address has at least one @ sign and one dot character
-        $i = strpos($email, '.');
-        if ($i === false){
-            $message = 'No period(.) was found in the email address';
+
+        /*************************************************
+         * validate and process the password
+         ************************************************/
+        if (!empty($password)){
+            $password_valid = password_validation($password);
+        
+            if ($password_valid === true) {
+                $message = "";
+            }
+            if ($password_valid === false) {
+            $message = 'Password is too short.';
+            }
         }
-        $i = strpos($email, '@');
-        if ($i === false){
-            $message = 'No @ was found in the email address';
+        else if (empty($password)){
+            $message = 'You must enter a password.';
         }
+        
         if ($message == "") {
             $message = 'Email address and password have been accepted.';
         }
         
-        /*************************************************
-         * validate and process the password
-         ************************************************/
-        // Make sure the password is at least 4 characters
-        $i = strlen($password);
-        if ($i < 4){
-            $message = 'Password is too short.';
-        }
         $password = sha1($password);
         break;
 }
-include 'display_results.php';
+include 'login.php';
 ?>
