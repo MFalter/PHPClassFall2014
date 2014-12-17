@@ -8,6 +8,10 @@ if (isset($_POST['action'])) {
 switch ($action) {
     case 'start_app':
         $message = 'Enter some data and click on the Submit button.';
+        $name = '';
+        $email = '';
+        $phone = '';
+        $message = '';
         break;
     case 'process_data':
         $name = $_POST['name'];
