@@ -1,64 +1,86 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 <?php
-include_once "functions.php";
-if (isset($_POST['action'])) {
-    $action =  $_POST['action'];
-} else {
-    $action =  'start_app';
+    // Function to check to see if the email and password exist
+    function checkLoginData($email, $password) {
+                                      
+    $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
+    $dbs = $db->prepare('select email, password FROM signup WHERE email = :email');
+    $dbs->bindParam(':email', $email);
+    $dbs->execute();
+    $rows = $dbs->fetchAll();
+    $dbs->closeCursor();
+   
+    foreach ($rows as $row) {
+        if ($row['password'] == sha1($password)) {
+            return true;}
+    }
+    return false;
 }
 
-switch ($action) {
-    case 'start_app':
-        $email = '';
-        $password = '';
-        $message = 'Enter e-mail address and password';
-        break;
-    case 'process_data':
-        $email = $_POST['email'];
-        $email = trim($email); // Gets rid of spaces on the ends
-        $password = $_POST['password'];
-        $message = '';
+// Function to check to see if email is all ready registered in the database.
+function checkEmailRegistration($email) {
+                                    
+    $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
+    $dbs = $db->prepare('select email, password from signup where email = :email');
+    $dbs->bindParam(':email', $email);
+    $dbs->execute();
+    $rows = $dbs->fetchAll();
+    $dbs->closeCursor();
+    
+    return count($rows)>0;
+}
 
-        /*************************************************
-         * validate and process the email address
-         ************************************************/
-        if (!empty($email)){
-            $email_valid = email_validation($email);
-        
-            if ($email_valid === true) {
-                $message = "Email address has been accepted.";
-            }
-            if ($email_valid === false) {
-            $message = "Enter a valid email address";
-            }
-        }
-        else if (empty($email)){
-            $message = 'You must enter your email address.';
-        }
+// Function to check if the email is valid
+function validEmail($email) {
+    if (empty($email)) {
+        return false;
+    }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return false;
+    }
+    return true;
+}
+// Function to check if a password is valid
+function validPassword($password) {
+    if (empty($password)) {
+        return false;
+    }
+    if (strlen($password) < 4) {
+        return false;
+    }
+    return true;
+}
 
-        /*************************************************
-         * validate and process the password
-         ************************************************/
-        if (!empty($password)){
-            $password_valid = password_validation($password);
-        
-            if ($password_valid === true) {
-                $message = "";
-            }
-            if ($password_valid === false) {
-            $message = 'Password is too short.';
-            }
-        }
-        else if (empty($password)){
-            $message = 'You must enter a password.';
-        }
-        
-        if ($message == "") {
-            $message = 'Email address and password have been accepted.';
-        }
-        
+//Get values from the form
+$message = '';
+$email = filter_input(INPUT_POST, 'email');
+$password = filter_input(INPUT_POST, 'password');
+
+// Validate data
+if (!validEmail($email)) {
+    $message .= 'Please enter a valid Email.';
+}
+else if (!validPassword($password)) {
+    $message .= 'Please enter a valid Password.';
+}
+ 
+else { // Only if entered data is valid
+    if (checkLoginData($email, $password)) {
+        $message = 'Membership confirmed.';
+    } else if (checkEmailRegistration($email)) {
+        $message = 'email is taken.';
+    } else { // If email is available: register as a new user
+                                     
+        $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
+        $dbs = $db->prepare('insert into signup set email=:email, password= :password');
         $password = sha1($password);
-        break;
+        $dbs->bindParam(':email', $email, PDO::PARAM_INT);
+        $dbs->bindParam(':password', $password, PDO::PARAM_INT);
+        if ($dbs->execute() && $dbs->rowCount() > 0) {
+            $message = 'Welcome to the club!';
+        } else {
+            $message = 'Signup Error.  Try again';
+        }
+    }
 }
-include 'login.php';
+include 'checkStatus.php';
 ?>
