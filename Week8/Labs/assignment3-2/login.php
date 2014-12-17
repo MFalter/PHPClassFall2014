@@ -1,14 +1,11 @@
 <?php
-
 $message = 'Enter your email and password.';
 $email = '';
 $password = '';
-
  // remove all session variables
 if (!isset($_SESSION)) session_start();
 session_unset();
 session_destroy();
-
 // Function to check to see if the email and password exist
 function checkLoginData($email, $password) {
                                       
@@ -25,7 +22,6 @@ function checkLoginData($email, $password) {
     }
     return false;
 }
-
 // Function to check if the email is valid
 function validEmail($email) {
     if (empty($email)) {
@@ -36,7 +32,6 @@ function validEmail($email) {
     }
     return true;
 }
-
 // Function to check if a password is valid
 function validPassword($password) {
     if (empty($password)) {
@@ -47,7 +42,6 @@ function validPassword($password) {
     }
     return true;
 }
-
 include "header.php";
 if(in_array("Submit",$_POST))
 {
@@ -55,7 +49,6 @@ if(in_array("Submit",$_POST))
 $message = '';
 $email = filter_input(INPUT_POST, 'email');
 $password = filter_input(INPUT_POST, 'password');
-
 // Validate data
 if (!validEmail($email)) {
     $message .= 'Please enter a valid Email.';
@@ -64,7 +57,6 @@ else if (!validPassword($password)) {
     $message .= 'Please enter a valid Password.';
 }
 }
-
 if(!in_array("Submit",$_POST) || !empty($message))
 {?>
 

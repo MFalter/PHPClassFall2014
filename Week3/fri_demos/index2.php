@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -6,10 +5,8 @@
     </head>
     <body>
         <?php
-        // put your code here
-        
         $id = filter_input(INPUT_GET, 'id');
-        // $id = $_GET['id'];
+        // $id = $_GET['id']; less secure
         $email = filter_input(INPUT_GET, 'email');
         // $email = $_GET['email'];
         
@@ -19,10 +16,8 @@
         $dbs->bindParam(':id', $id, PDO::PARAM_INT);
         $dbs->bindParam(':email', $email, PDO::PARAM_STR);
         
-        
         if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
             $results = $dbs->fetch(PDO::FETCH_ASSOC);
-            
             echo '<ul>';
             echo '<li>', $results['id'] , '</li>';
             echo '<li>', $results['fullname'] , '</li>';
@@ -31,10 +26,6 @@
             echo '<li>', $results['zip'] , '</li>';
             echo '</ul>';
         } else {
-            echo 'no data';
-        }
-        
-        
-        ?>
+            echo 'no data'; } ?>
     </body>
 </html>

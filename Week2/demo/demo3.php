@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-
-
 <html>
     <head>
         <meta charset="UTF-8">
         <title></title>
     </head>
     <body>
-        
         <h1> My Form </h1>
         <form action ="#" method="post">
             First Name: <input type="text" name="fname" /> <br />
@@ -20,31 +16,26 @@
                                * since it works off the server and not the URL.  
                                * The user cannot see it.*/
            
-           filter_input(INPUT_POST, 'fname'); // More secure
+            filter_input(INPUT_POST, 'fname'); // More secure
            // http://us3.php.net/manual/en/function.filter-input.php
            
-           $errorMsg = '';
-           
-           if (!empty($_POST)){
-           
-           if (empty($_POST['fname'])=== true || empty($_POST['lname'])=== true){
-               $errorMsg = 'You must enter a full name';
-               echo '<p>', $errorMsg, '</p>';
+            $errorMsg = '';
+           /*$_POST is a super global when forms are submmited via the post method
+            * you can check to see if the post is empty or not before executing logic.*/
+            if (!empty($_POST)){
+                if (empty($_POST['fname'])=== true || empty($_POST['lname'])=== true){
+                    $errorMsg = 'You must enter a full name';
+                    echo '<p>', $errorMsg, '</p>';
                 }
-           }
-           
-           
-           
-           if (empty($_POST['fname'])=== false){
+            }
+            if (empty($_POST['fname'])=== false){
             echo $_POST['fname'];}
             
             if (isset($_POST['lname']) === true){
                 echo $_POST['lname'];}
            
-           
-           if (empty($errorMsg)=== false){ 
-               echo '<p>', $errorMsg, '</p>';
-                }
+            if (empty($errorMsg)=== false){ 
+               echo '<p>', $errorMsg, '</p>'; }
            
            /*Some PHP functions
            /*empty /* a PHP global function

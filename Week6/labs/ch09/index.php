@@ -95,7 +95,6 @@ switch ($action) {
                    "Email: $email \n".
                    "Phone: $phone";
         }
-
         break;
 }
 include 'string_tester.php';

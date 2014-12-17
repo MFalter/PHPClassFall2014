@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -6,8 +5,6 @@
     </head>
     <body>
         <?php
-        // put your code here
-        
         $id = filter_input(INPUT_GET, 'id');
         $username = filter_input(INPUT_GET, 'username');
         $db = new PDO(Config::DB_DNS, Config::DB_USER, Config::DB_PASSWORD);
@@ -17,17 +14,13 @@
         $dbs->bindParam(':username', $username, PDO::PARAM_STR);
         $dbs->execute();
         
-        
         if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
                 $isTaken = true;
             }
         
-        /*
-         * for one record use
-         */
+        //for one record use
         $results = $dbs->fetch(PDO::FETCH_ASSOC);
-         
-        
+        // for all records 
         $results = $dbs->fetchAll(PDO::FETCH_ASSOC);
         echo '<table border="1">'; 
         echo '<tr><th>Index</th><th>ID</th><th>Email</th>';
@@ -41,9 +34,6 @@
              echo '<td>', $value['password'] ,'</td>';          
             echo '</tr>';
         }
-        echo '</table>';
-        
-        
-        ?>
+        echo '</table>'; ?>
     </body>
 </html>

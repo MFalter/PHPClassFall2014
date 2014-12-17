@@ -6,15 +6,11 @@
     </head>
     <body>
         <?php
-       
             $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
             $dbs = $db->prepare('select * from users');
         
             if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
-                
                 $results = $dbs->fetchAll(PDO::FETCH_ASSOC);
-                
-                
                 echo '<table border="1">'; 
                 echo '<tr><th>Index</th><th>ID</th><th>Email</th>';
                 echo '<th>fullname</th><th>phone</th><th>ZIP</th><th></th><th></th></tr>';
@@ -31,10 +27,6 @@
                     echo '</tr>';
                 }
                 echo '</table>';
-                
-                
-            }
-        
-        ?>
+            } ?>
     </body>
 </html>
