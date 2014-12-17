@@ -1,10 +1,9 @@
 <?php
-// Get the product data
+// Get the product data from the POST
 $category_id = $_POST['category_id'];
 $code = $_POST['code'];
 $name = $_POST['name'];
 $price = $_POST['price'];
-
 // Validate inputs
 if (empty($code) || empty($name) || empty($price) ) {
     $error = "Invalid product data. Check all fields and try again.";
@@ -17,7 +16,6 @@ if (empty($code) || empty($name) || empty($price) ) {
               VALUES
                  ('$category_id', '$code', '$name', '$price')";
     $db->exec($query);
-
     // Display the Product List page
     include('index.php');
 }

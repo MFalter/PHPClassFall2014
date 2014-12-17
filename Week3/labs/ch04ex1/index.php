@@ -1,6 +1,5 @@
 <?php
     require_once('database.php');
-
     // Get category ID
     if(!isset($category_id)) {
         $category_id = $_GET['category_id'];
@@ -8,19 +7,16 @@
             $category_id = 1;
         }
     }
-
     // Get name for current category
     $query = "SELECT * FROM categories
               WHERE categoryID = $category_id";
     $category = $db->query($query);
     $category = $category->fetch();
     $category_name = $category['categoryName'];
-
     // Get all categories
     $query = 'SELECT * FROM categories
               ORDER BY categoryID';
     $categories = $db->query($query);
-
     // Get products for selected category
     $query = "SELECT * FROM products
               WHERE categoryID = $category_id
