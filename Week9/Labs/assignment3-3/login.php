@@ -6,42 +6,22 @@ $password = '';
 if (!isset($_SESSION)) session_start();
 session_unset();
 session_destroy();
-// Function to check to see if the email and password exist
-function checkLoginData($email, $password) {
-                                      
-    $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
-    $dbs = $db->prepare('select email, password FROM signup WHERE email = :email');
-    $dbs->bindParam(':email', $email);
-    $dbs->execute();
-    $rows = $dbs->fetchAll();
-    $dbs->closeCursor();
-   
-    foreach ($rows as $row) {
-        if ($row['password'] == sha1($password)) {
-            return true;}
-    }
-    return false;
+
+include './validation.php';
+$functions = new ValidatorClass();
+if ($functions->validEmail($email)== false) {
+   $errors[] = "Email not found.";
 }
-// Function to check if the email is valid
-function validEmail($email) {
-    if (empty($email)) {
-        return false;
-    }
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return false;
-    }
-    return true;
+if ($functions->checkLoginData($email, $password)== true){
+    $_SESSION['loggedin']=true;
+} else {
+    $_SESSION['loggedin']=false;
+    $errors[] = "Account not found.";
 }
-// Function to check if a password is valid
-function validPassword($password) {
-    if (empty($password)) {
-        return false;
+    if ($_SESSION['loggedin'] == true) {
+      header('Location: admin.php');
     }
-    if (strlen($password) < 4) {
-        return false;
-    }
-    return true;
-}
+
 include "header.php";
 if(in_array("Submit",$_POST))
 {

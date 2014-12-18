@@ -14,6 +14,7 @@ if(!isset($_SESSION['loggedin']))
 
 <?php
 include "header.php";
+include './ValidatorClass.php';
 ?>
 
 </body>
