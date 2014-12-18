@@ -20,7 +20,7 @@
     <?php endif; ?>
 
 <body>
-    <div id="page">
+    <div id="content">
         <div id="header">
         </div>
          <div id="main">
@@ -35,7 +35,7 @@
                 <br />
 
                 <label>Password:</label>
-                <input type="text" name="password" />
+                <input type="password" name="password" />
                 <br />
                 <br />
                 

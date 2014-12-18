@@ -18,6 +18,8 @@ if ($functions->check_email($email)== true) {
 if (isset($email)&& count($errors)== 0){
     $password = sha1($password);
     
+    include('signup.php');
+    
     $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
     $dbs = $db->prepare('INSERT into signup set email = :email, password = :password');
     $dbs->bindParam(':email', $email, PDO::PARAM_STR);
@@ -27,9 +29,8 @@ if (isset($email)&& count($errors)== 0){
         echo "Sign Up Complete";
     } else {
         echo "Sign Up Incomplete";
-        var_dump($db->errorInfo());
     }    
-}
+} else {
     include('signup.php');
-
+}
 ?>

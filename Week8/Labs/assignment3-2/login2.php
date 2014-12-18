@@ -21,7 +21,7 @@ else
 }
     
 if ($_SESSION['loggedin'] == true) {
-      header('Location: Admin.php');
+    header('Location: Admin.php');
 }
 
     include('login.php');

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Sign Up</title>
-        <link rel="stylesheet" type="text/css" href="main.css"/>
-    </head>
-    <body>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="main.css"/>
+</head>
+
+<body>
         
     <?php 
     include_once 'Header.php';
     ?>
         
-
 <body>
-    <div id="page">
+    <div id="content">
         <div id="header">
         </div>
          <div id="main">
@@ -23,12 +23,12 @@
                 </select>
                 <br />
 
-                <label>email:</label>
+                <label>Email:</label>
                 <input type="text" name="email" />
                 <br />
 
-                <label>password</label>
-                <input type="text" name="password" />
+                <label>Password:</label>
+                <input type="password" name="password" />
                 <br />
                 
                 <label>&nbsp;</label>
@@ -45,5 +45,4 @@
             </form>
         </div>
 </body>
-</html>
 </html>
