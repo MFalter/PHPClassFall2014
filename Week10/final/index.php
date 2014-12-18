@@ -11,6 +11,7 @@
             if (empty($_POST)) {
                 $email = '';
                 $phone = '';
+                $message = '';
             }
         $heardSelected = filter_input(INPUT_POST, 'heard');
         $contact = filter_input(INPUT_POST, 'contact');
@@ -34,27 +35,18 @@
             <legend>Settings</legend>
 
                 <p>How did you hear about us?</p>
-                <input type="radio" name="heard" value="Search Engine" 
-                    <?php if ($heardSelected === 'Search Engine'){ 
-                    echo $heardSelected; } ?>/> Search engine<br />
-                <input type="radio" name="heard" value="Friend" 
-                    <?php if ($heardSelected === 'Friend'){ 
-                    echo $heardSelected; } ?>/> Word of mouth<br />
-                <input type=radio name="heard" value="Other" 
-                       <?php if ($heardSelected === 'Other'){ 
-                    echo $heardSelected; } ?>/> Other<br />
+                <input type="radio" name="heard" <?php if (isset($heardSelected) && $heardSelected=="Search Engine") echo "checked";?> 
+                       value="Search Engine" /> Search engine<br />
+                <input type="radio" name="heard" <?php if (isset($heardSelected) && $heardSelected=="Friend") echo "checked";?>
+                       value="Friend" /> Word of mouth<br />
+                <input type=radio name="heard" <?php if (isset($heardSelected) && $heardSelected=="Other") echo "checked";?>
+                       value="Other" /> Other<br />
 
                 <p>Contact via:</p>
                 <select name="contact">
-                    <option value="email">Email
-                    <?php if ($contact === 'email'){ 
-                        echo $contact; } ?></option>
-                    <option value="text">Text Message
-                    <?php if ($contact === 'text'){ 
-                        echo $contact; } ?></option>
-                    <option value="phone">Phone
-                    <?php if ($contact === 'phone'){ 
-                        echo $contact; } ?></option>
+                    <option value="email">Email</option>
+                    <option value="text">Text Message</option>
+                    <option value="phone">Phone</option>
                 </select>
 
                 <p>Comments: (optional)</p>
@@ -63,6 +55,14 @@
 
             <input type="submit" value="Submit" />
 
+            <?php 
+            if ($message != '')
+            { ?>
+            </br>
+                <h2>Message:</h2>
+                <p><?php echo nl2br(htmlspecialchars($message)); ?></p>
+            <?php } ?>
+            
             </form>
             <br />
         </div>

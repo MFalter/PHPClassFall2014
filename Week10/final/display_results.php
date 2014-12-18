@@ -19,7 +19,7 @@
         $heardSelected = $_POST['heard'];
     }else {
     $heardSelected = "unknown";
-    $message .= '<p>Please tell us how you heard about us.</p>';
+    $message .= "\n" . 'Please tell us how you heard about us.';
     }    
     
 // Strip the HTML from the comments   
@@ -28,9 +28,7 @@
     
 // Function to check if the email is valid
 function validEmail($email) {
-    if (empty($email)) {
-        return false;
-    } if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         return false;
     }
         return true;
@@ -53,24 +51,24 @@ function validPhoneNumber($phone){
 function checkEmailRegistration($email) {
                                     
     $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
-    $dbs = $db->prepare('select email, password from account where email = :email');
+    $dbs = $db->prepare('select * from account where email = :email');
     $dbs->bindParam(':email', $email);
-    $dbs->execute();
-    $rows = $dbs->fetchAll();
-    $dbs->closeCursor();
-    
-    return count($rows)>0;
+    if ( $dbs->execute() && $dbs->rowCount() > 0 )
+    {
+        return true;
+    }
+    return false;
 }
 
     // Validate data
 if (!validEmail($email)) {
-    $message .= '<p>Please enter a valid Email.</p>';
+    $message .= "\n" . 'Please enter a valid Email.';
 }  
 if (!validPhoneNumber($phone)){
-    $message .= '<p>Please enter a valid Phone Number.</p>';
+    $message .= "\n" . 'Please enter a valid Phone Number.';
 }
 else { // Only if entered data is valid
-    if (checkEmailRegistration($email)) {
+    if (checkEmailRegistration($email) && $heardSelected != "unknown") {
         $message = 'Email is taken.';
     } else { // If email is available: register as a new user
  
@@ -96,7 +94,7 @@ else { // Only if entered data is valid
         $dbs->bindParam(':contact', $contact, PDO::PARAM_STR);
         $dbs->bindParam(':comments', $comments, PDO::PARAM_STR);
         if ($dbs->execute() && $dbs->rowCount() > 0) {
-            $message = 'ok';
+            $message = '';
         } else {
             echo $message;
         }
@@ -104,9 +102,9 @@ else { // Only if entered data is valid
 }   
 ?>
 <?php
-if ($message != 'ok')
+if ($message != '')
 {
-    echo $message;
+    include "index.php";
 }
 else { ?>
 <!DOCTYPE html>
