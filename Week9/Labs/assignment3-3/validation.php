@@ -4,60 +4,53 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /**
- * Description of FunctionsClass
+ * Description of validation
  *
  * @author 001331285
  */
-class validatorClass {
+class validation {
     
-function checkLoginData($email, $password)
+   function check_login($email, $password)
 {
     $password = sha1($password);
     
     $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
-    $dbs = $db->prepare('select email, password FROM signup WHERE email = :email');
-    $dbs->bindParam(':email', $email);
-    $dbs->execute();
-    $rows = $dbs->fetchAll();
-    $dbs->closeCursor();
-   
-    foreach ($rows as $row) {
-        if ($row['password'] == sha1($password)) {
-            return true;}
+    $dbs = $db->prepare('SELECT * FROM signup WHERE email = :email AND password = :password');
+    $dbs->bindParam(':email', $email, PDO::PARAM_STR);
+    $dbs->bindParam(':password', $password, PDO::PARAM_STR);
+    if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
+        return true;
+    } else {
+        return false;
     }
-    return false;
 }
-function checkEmailRegistration($email)
+function check_email($email)
 {
     $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
-    $dbs = $db->prepare('select email, password from signup where email = :email');
-    $dbs->bindParam(':email', $email);
-    $dbs->execute();
-    $rows = $dbs->fetchAll();
-    $dbs->closeCursor();
-    
-    return count($rows)>0;
+    $dbs = $db->prepare('SELECT * FROM signup WHERE email = :email');
+    $dbs->bindParam(':email', $email, PDO::PARAM_STR);
+    if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
+        return true;
+    } else {
+        return false;
+    }
 }
-function validEmail($email)
+function valid_email($email)
 {
-   if (empty($email)) {
-        return false;
-    }
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return false;
-    }
-    return true;
+   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+   return false;
+   } else {
+   return true;
+   }
 } 
-function validPassword($password)
+function valid_password($password)
 {
-   if (empty($password)) {
-        return false;
-    } 
-    if (strlen($password) < 4) {
-        return false;
-    }
-    return true;
+   if (isset($password) && (strlen($password) < 4)) {
+       return false;
+   } else {
+       return true;
+   }
+} 
 }
-}
-?>
