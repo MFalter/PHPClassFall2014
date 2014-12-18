@@ -44,9 +44,12 @@
 
                 <p>Contact via:</p>
                 <select name="contact">
-                    <option value="email">Email</option>
-                    <option value="text">Text Message</option>
-                    <option value="phone">Phone</option>
+                    <option <?php if (isset($contact) && $contact=="email") echo "selected";?> 
+                        value="email">Email</option>
+                    <option <?php if (isset($contact) && $contact=="text") echo "selected";?>  
+                        value="text">Text Message</option>
+                    <option <?php if (isset($contact) && $contact=="phone") echo "selected";?>  
+                        value="phone">Phone</option>
                 </select>
 
                 <p>Comments: (optional)</p>
