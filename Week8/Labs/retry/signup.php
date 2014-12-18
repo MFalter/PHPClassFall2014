@@ -1,47 +1,49 @@
-<?php 
-$message = 'Enter your email and password.';?>
+<!DOCTYPE html>
 <html>
     <head>
-    <title>Sign Up</title>
-    <link rel="stylesheet" type="text/css" href="main.css"/>
-</head>
+        <meta charset="UTF-8">
+        <title>Sign Up</title>
+        <link rel="stylesheet" type="text/css" href="main.css"/>
+    </head>
     <body>
-    
+        
     <?php 
-            include_once 'header.php';
-            
-        if (isset($errors)&& count($errors)> 0) : ?>
-        <h2>Errors:</h2>
-        <ul>
-        <?php foreach($errors as $error) : ?>
-            <li><?php echo $error; ?></li>
-        <?php endforeach; ?>
-        </ul>
-    <?php endif; ?>
+    include_once 'Header.php';
+    ?>
+        
 
 <body>
-    <div id="content">
+    <div id="page">
+        <div id="header">
+        </div>
+         <div id="main">
             <h1>Sign Up</h1>
-            <form action="signup2.php" method="post">
-            <input type="hidden" name="action" value="process_data"/>
+            <form action="signup2.php" method="post"
+                  >
+                </select>
                 <br />
-                
-                <label>E-Mail:</label>
+
+                <label>email:</label>
                 <input type="text" name="email" />
                 <br />
 
-                <label>Password:</label>
+                <label>password</label>
                 <input type="text" name="password" />
                 <br />
-                <br />
- 
+                
                 <label>&nbsp;</label>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Login" />
                 <br />
+                
+                <?php
+                if (isset($errors)&& count($errors)> 0) : ?>
+                <h2>Errors:</h2>
+                <?php foreach($errors as $error) : 
+                    echo $error;
+                    endforeach;
+                    endif; ?>
             </form>
-            <h2>Message:</h2>
-            <p><?php echo nl2br(htmlspecialchars($message)); ?></p>
         </div>
-        
 </body>
+</html>
 </html>
