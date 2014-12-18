@@ -20,10 +20,9 @@ else
     $errors[] = "Invalid Login.  Please reenter email and password.";
 }
     
-    if ($_SESSION['loggedin'] == true)
-    {
-      header('Location: Admin.php');
-    }
+if ($_SESSION['loggedin'] == true) {
+    header('Location: Admin.php');
+}
 
     include('login.php');
 ?>

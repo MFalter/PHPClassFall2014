@@ -32,4 +32,4 @@ if (isset($email)&& count($errors)== 0){
 }
     include('signup.php');
 
-    ?>
+?>
