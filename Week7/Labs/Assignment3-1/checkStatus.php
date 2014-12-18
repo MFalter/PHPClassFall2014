@@ -27,8 +27,11 @@
         </form>
         
         <h2>Message:</h2>
-        <p><?php echo nl2br(htmlspecialchars($message)); ?></p>
-        
+        <p><?php if (isset($errors)&& count($errors)> 0) : ?>
+            <?php foreach($errors as $error) : ?>
+            <?php echo $error; ?> </br>
+            <?php endforeach; ?>
+            <?php endif; ?>
     </div>
 </body>
 </html>

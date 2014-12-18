@@ -51,23 +51,24 @@ function validPassword($password) {
 }
 
 //Get values from the form
-$message = '';
+$errors = array();
 $email = filter_input(INPUT_POST, 'email');
 $password = filter_input(INPUT_POST, 'password');
 
 // Validate data
 if (!validEmail($email)) {
-    $message .= 'Please enter a valid Email.';
+    $errors[] = "\nPlease enter a valid E-mail.";
 }
-else if (!validPassword($password)) {
-    $message .= 'Please enter a valid Password.';
+if (!validPassword($password)) {
+    $errors[] = "\nPlease enter a valid Password.";
 }
  
 else { // Only if entered data is valid
     if (checkLoginData($email, $password)) {
-        $message = 'Membership confirmed.';
-    } else if (checkEmailRegistration($email)) {
-        $message = 'email is taken.';
+        $errors[] = "\nMembership confirmed.";
+    }
+    if (checkEmailRegistration($email)) {
+        $errors[] = "\nE-mail is taken.";
     } else { // If email is available: register as a new user
                                      
         $db = new PDO("mysql:host=localhost;dbname=phpclassfall2014", "root", "");
@@ -76,9 +77,9 @@ else { // Only if entered data is valid
         $dbs->bindParam(':email', $email, PDO::PARAM_INT);
         $dbs->bindParam(':password', $password, PDO::PARAM_INT);
         if ($dbs->execute() && $dbs->rowCount() > 0) {
-            $message = 'Welcome to the club!';
+            $errors[] = "\nWelcome to the club!";
         } else {
-            $message = 'Signup Error.  Try again';
+            $errors[] = "\nSignup Error.  Try again";
         }
     }
 }
